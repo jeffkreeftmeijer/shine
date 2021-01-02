@@ -1,6 +1,9 @@
 import gleam/atom
 import gleam/list
 
+pub external fn basename(String) -> String =
+  "filename" "basename"
+
 pub external fn rootname(String) -> String =
   "filename" "rootname"
 
