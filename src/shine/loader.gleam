@@ -3,6 +3,12 @@ import gleam/list
 import gleam/map
 import path
 
+pub fn load_files() {
+  "**/*_test.gleam"
+  |> path.wildcard()
+  |> load_tests()
+}
+
 pub fn load_tests(
   paths: List(String),
 ) -> List(tuple(Atom, List(tuple(Atom, Int)))) {
