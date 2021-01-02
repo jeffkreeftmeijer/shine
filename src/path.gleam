@@ -4,6 +4,9 @@ import gleam/list
 pub external fn basename(String) -> String =
   "filename" "basename"
 
+pub external fn basename_without_extension(String, String) -> String =
+  "filename" "basename"
+
 pub external fn rootname(String) -> String =
   "filename" "rootname"
 
