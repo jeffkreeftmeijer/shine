@@ -21,6 +21,14 @@ pub fn run_case_test() {
   |> should.be_ok()
 }
 
+pub fn run_suite_test() {
+  let suite = [tuple("test", [passing])]
+  assert [tuple("test", [result])] = shine.run_suite(suite)
+
+  result
+  |> should.be_ok()
+}
+
 fn passing() {
   1
   |> should.equal(1)
