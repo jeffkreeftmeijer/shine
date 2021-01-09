@@ -2,6 +2,11 @@ import gleam/function.{Exception}
 import gleam/list
 import gleam/io
 
+pub fn init(state) {
+  assert Ok(state) = rebar3_shine_init(state)
+  Ok(state)
+}
+
 pub fn run_suite(
   suite: List(tuple(String, List(fn() -> a))),
 ) -> List(tuple(String, List(Result(a, Exception)))) {
@@ -30,3 +35,6 @@ pub fn run_test(test: fn() -> a) -> Result(a, Exception) {
     }
   }
 }
+
+external fn rebar3_shine_init(state) -> state =
+  "shine_prv" "init"
