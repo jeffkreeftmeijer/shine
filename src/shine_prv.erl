@@ -25,12 +25,14 @@ init(State) ->
 
 -spec do(rebar_state:t()) -> {ok, rebar_state:t()} | {error, string()}.
 do(State) ->
-    compile:file("gen/test/shine_test"),
-    Pass = fun shine_test:passing/0,
-    Fail = fun shine_test:failing/0,
+    rebar_gleam:provider_do(State, fun (State1) ->
+      compile:file("gen/test/shine_test"),
+      Pass = fun shine_test:passing/0,
+      Fail = fun shine_test:failing/0,
 
-    shine:run_suite([{"shine_test", [Pass, Fail]}]),
-    {ok, State}.
+      shine:run_suite([{"shine_test", [Pass, Fail]}]),
+      {ok, State1}
+    end).
 
 -spec format_error(any()) ->  iolist().
 format_error(Reason) ->
