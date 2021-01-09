@@ -13,6 +13,14 @@ pub fn run_failing_test() {
   |> should.be_error()
 }
 
+pub fn run_case_test() {
+  let test_case = [passing]
+  assert [result] = shine.run_case(test_case)
+
+  result
+  |> should.be_ok()
+}
+
 fn passing() {
   1
   |> should.equal(1)
