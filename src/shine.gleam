@@ -1,5 +1,6 @@
 import gleam/function.{Exception}
 import gleam/list
+import gleam/io
 
 pub fn run_suite(
   suite: List(tuple(String, List(fn() -> a))),
@@ -18,5 +19,14 @@ pub fn run_case(tests: List(fn() -> a)) -> List(Result(a, Exception)) {
 }
 
 pub fn run_test(test: fn() -> a) -> Result(a, Exception) {
-  function.rescue(test)
+  case function.rescue(test) {
+    Error(e) -> {
+      io.print("F")
+      Error(e)
+    }
+    Ok(i) -> {
+      io.print(".")
+      Ok(i)
+    }
+  }
 }
