@@ -29,12 +29,12 @@ pub fn run_suite_test() {
   |> should.be_ok()
 }
 
-fn passing() {
+pub fn passing() {
   1
   |> should.equal(1)
 }
 
-fn failing() {
+pub fn failing() {
   1
   |> should.equal(2)
 }
