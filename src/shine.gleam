@@ -26,7 +26,8 @@ pub fn run_case(tests: List(fn() -> a)) -> List(Result(a, Exception)) {
 pub fn run_test(test: fn() -> a) -> Result(a, Exception) {
   case function.rescue(test) {
     Error(e) -> {
-      io.print("F")
+      io.println("F")
+      io.debug(e)
       Error(e)
     }
     Ok(i) -> {
