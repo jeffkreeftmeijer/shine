@@ -1,6 +1,15 @@
 import gleam/function.{Exception}
 import gleam/list
 import gleam/io
+import gleam/dynamic.{Dynamic}
+
+pub type Test {
+  Test(run: fn() -> Result(Dynamic, Exception))
+}
+
+pub type TestModule {
+  TestModule(name: String, tests: List(Test))
+}
 
 pub fn init(state) {
   assert Ok(state) = rebar3_shine_init(state)
@@ -8,25 +17,19 @@ pub fn init(state) {
 }
 
 pub fn run_suite(
-  suite: List(tuple(String, List(fn() -> Result(a, Exception)))),
-) -> List(tuple(String, List(Result(a, Exception)))) {
-  list.map(
-    suite,
-    fn(test_case) {
-      let tuple(module, tests) = test_case
-      tuple(module, run_case(tests))
-    },
-  )
+  suite: List(TestModule),
+) -> List(tuple(String, List(Result(Dynamic, Exception)))) {
+  list.map(suite, run_test_module)
 }
 
-pub fn run_case(
-  tests: List(fn() -> Result(a, Exception)),
-) -> List(Result(a, Exception)) {
-  list.map(tests, run_test)
+pub fn run_test_module(
+  test_module: TestModule,
+) -> tuple(String, List(Result(Dynamic, Exception))) {
+  tuple(test_module.name, list.map(test_module.tests, run_test))
 }
 
-pub fn run_test(test: fn() -> Result(a, Exception)) -> Result(a, Exception) {
-  case test() {
+pub fn run_test(test: Test) -> Result(Dynamic, Exception) {
+  case test.run() {
     Error(e) -> {
       io.println("F")
       io.debug(e)
