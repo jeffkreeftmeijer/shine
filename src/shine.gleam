@@ -19,7 +19,9 @@ pub fn run_suite(
   )
 }
 
-pub fn run_case(tests: List(fn() -> Result(a, Exception))) -> List(Result(a, Exception)) {
+pub fn run_case(
+  tests: List(fn() -> Result(a, Exception)),
+) -> List(Result(a, Exception)) {
   list.map(tests, run_test)
 }
 
