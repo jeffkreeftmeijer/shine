@@ -1,5 +1,7 @@
 import shine
 import gleam/should
+import gleam/dynamic
+import gleam/function
 
 pub fn run_passing_test() {
   passing
@@ -30,11 +32,9 @@ pub fn run_suite_test() {
 }
 
 pub fn passing() {
-  1
-  |> should.equal(1)
+  Ok(Nil)
 }
 
 pub fn failing() {
-  1
-  |> should.equal(2)
+  Error(function.Errored(dynamic.from("")))
 }
