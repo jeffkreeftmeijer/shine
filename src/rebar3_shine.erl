@@ -51,4 +51,4 @@ is_test(_Name, _Arity) ->
     false.
 
 to_fun(Module, Function, 0) ->
-    fun() -> erlang:apply(Module, Function, []) end.
+    fun() -> gleam_stdlib:rescue(fun() -> erlang:apply(Module, Function, []) end) end.
