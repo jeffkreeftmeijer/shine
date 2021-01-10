@@ -1,4 +1,4 @@
--module(shine_prv).
+-module(rebar3_shine).
 
 -export([init/1, do/1, format_error/1]).
 

@@ -38,4 +38,4 @@ pub fn run_test(test: fn() -> a) -> Result(a, Exception) {
 }
 
 external fn rebar3_shine_init(state) -> state =
-  "shine_prv" "init"
+  "rebar3_shine" "init"
