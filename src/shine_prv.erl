@@ -26,11 +26,18 @@ init(State) ->
 -spec do(rebar_state:t()) -> {ok, rebar_state:t()} | {error, string()}.
 do(State) ->
     rebar_gleam:provider_do(State, fun (State1) ->
-      compile:file("gen/test/shine_test"),
-      Pass = fun shine_test:passing/0,
-      Fail = fun shine_test:failing/0,
+      {ok, Module} = compile:file("gen/test/shine_test"),
+      Exports = Module:module_info(exports),
+      TestNames = lists:filter(fun ({Name, Arity}) -> string:find(atom_to_list(Name), "_", trailing) =:= "_test" end, Exports),
+      Tests = lists:map(fun ({Function, _}) ->
+        fun () ->
+          erlang:apply(Module, Function, [])
+        end
+      end, TestNames),
 
-      shine:run_suite([{"shine_test", [Pass, Fail]}]),
+      erlang:display(TestNames),
+
+      shine:run_suite([{"shine_test", Tests}]),
       {ok, State1}
     end).
 
