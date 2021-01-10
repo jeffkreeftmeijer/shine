@@ -26,9 +26,9 @@ init(State) ->
 -spec do(rebar_state:t()) -> {ok, rebar_state:t()} | {error, string()}.
 do(State) ->
     rebar_gleam:provider_do(State, fun (State1) ->
-      compile:file("gen/test/shine_test"),
-      Pass = fun shine_test:passing/0,
-      Fail = fun shine_test:failing/0,
+      compile:file("gen/test/fixtures"),
+      Pass = fun fixtures:passing_test/0,
+      Fail = fun fixtures:failing_test/0,
 
       shine:run_suite([{"shine_test", [Pass, Fail]}]),
       {ok, State1}
