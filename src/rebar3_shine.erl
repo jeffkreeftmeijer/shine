@@ -26,11 +26,9 @@ init(State) ->
 do(State) ->
     rebar_gleam:provider_do(State,
                             fun(State1) ->
-                               compile:file("gen/test/shine_test"),
-                               Pass = fun shine_test:passing/0,
-                               Fail = fun shine_test:failing/0,
+                               {ok, Module} = compile:file("gen/test/test_project_test"),
 
-                               shine:run_suite([{"shine_test", [Pass, Fail]}]),
+                               shine:run_suite([{"test_project_test", extract_tests(Module)}]),
                                {ok, State1}
                             end).
 
