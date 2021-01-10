@@ -8,7 +8,7 @@ pub fn init(state) {
 }
 
 pub fn run_suite(
-  suite: List(tuple(String, List(fn() -> a))),
+  suite: List(tuple(String, List(fn() -> Result(a, Exception)))),
 ) -> List(tuple(String, List(Result(a, Exception)))) {
   list.map(
     suite,
@@ -19,20 +19,20 @@ pub fn run_suite(
   )
 }
 
-pub fn run_case(tests: List(fn() -> a)) -> List(Result(a, Exception)) {
+pub fn run_case(tests: List(fn() -> Result(a, Exception))) -> List(Result(a, Exception)) {
   list.map(tests, run_test)
 }
 
-pub fn run_test(test: fn() -> a) -> Result(a, Exception) {
-  case function.rescue(test) {
+pub fn run_test(test: fn() -> Result(a, Exception)) -> Result(a, Exception) {
+  case test() {
     Error(e) -> {
       io.println("F")
       io.debug(e)
       Error(e)
     }
-    Ok(i) -> {
+    Ok(a) -> {
       io.print(".")
-      Ok(i)
+      Ok(a)
     }
   }
 }
