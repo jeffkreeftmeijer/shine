@@ -48,7 +48,7 @@ extract_tests(Module) ->
 
 is_test({Name, 0}) ->
   string:find(atom_to_list(Name), "_", trailing) =:= "_test";
-is_test({Name, Arity}) -> false.
+is_test({_Name, _Arity}) -> false.
 
 to_fun(Module, Function, 0) ->
   fun() ->
