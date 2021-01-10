@@ -39,18 +39,15 @@ format_error(Reason) ->
     io_lib:format("~p", [Reason]).
 
 extract_tests(Module) ->
-  Exports = Module:module_info(exports),
-  TestNames = lists:filter(fun is_test/1, Exports),
+    Exports = Module:module_info(exports),
+    TestNames = lists:filter(fun is_test/1, Exports),
 
-  lists:map(fun ({Function, Arity}) ->
-    to_fun(Module, Function, Arity)
-  end, TestNames).
+    lists:map(fun({Function, Arity}) -> to_fun(Module, Function, Arity) end, TestNames).
 
 is_test({Name, 0}) ->
-  string:find(atom_to_list(Name), "_", trailing) =:= "_test";
-is_test({_Name, _Arity}) -> false.
+    string:find(atom_to_list(Name), "_", trailing) =:= "_test";
+is_test({_Name, _Arity}) ->
+    false.
 
 to_fun(Module, Function, 0) ->
-  fun() ->
-      erlang:apply(Module, Function, [])
-  end.
+    fun() -> erlang:apply(Module, Function, []) end.
