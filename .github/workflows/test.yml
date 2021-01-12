@@ -20,5 +20,6 @@ jobs:
           gleam-version: 0.13.0-rc1
       - run: rebar3 install_deps
       - run: rebar3 eunit
+      - run: cd test_project && rebar3 shine
       - run: rebar3 format --verify
       - run: gleam format --check src test
