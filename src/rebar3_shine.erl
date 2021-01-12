@@ -11,13 +11,12 @@
 -spec init(rebar_state:t()) -> {ok, rebar_state:t()}.
 init(State) ->
     Provider =
-        providers:create([{name, ?PROVIDER},            % The 'user friendly' name of the task
-                          {module, ?MODULE},            % The module implementation of the task
-                          {bare,
-                           true},                       % The task can be run by the user, always true
-                          {deps, ?DEPS},                % The list of dependencies
-                          {example, "rebar3 shine"},    % How to use the plugin
-                          {opts, []},                   % list of options understood by the plugin
+        providers:create([{name, ?PROVIDER},
+                          {module, ?MODULE},
+                          {bare, true},
+                          {deps, ?DEPS},
+                          {example, "rebar3 shine"},
+                          {opts, []},
                           {short_desc, "A rebar plugin"},
                           {desc, "A rebar plugin"}]),
     {ok, rebar_state:add_provider(State, Provider)}.
