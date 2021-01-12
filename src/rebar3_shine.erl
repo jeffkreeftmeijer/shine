@@ -18,7 +18,8 @@ init(State) ->
                           {example, "rebar3 shine"},
                           {opts, []},
                           {short_desc, "A rebar plugin"},
-                          {desc, "A rebar plugin"}]),
+                          {desc, "A rebar plugin"},
+                          {profiles, [test]}]),
     {ok, rebar_state:add_provider(State, Provider)}.
 
 -spec do(rebar_state:t()) -> {ok, rebar_state:t()} | {error, string()}.
