@@ -28,8 +28,9 @@ do(State) ->
                             fun(State1) ->
                                {ok, Module} = compile:file("gen/test/test_project_test"),
 
-                               case(shine:run_suite([{"test_project_test", extract_tests(Module)}])) of
-                                   [{"test_project_test",[{ok,ok}]}] -> {ok, State1};
+                               case shine:run_suite([{"test_project_test", extract_tests(Module)}])
+                               of
+                                   [{"test_project_test", [{ok, ok}]}] -> {ok, State1};
                                    _ -> halt(1)
                                end
                             end).
