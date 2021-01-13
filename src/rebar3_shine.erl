@@ -28,7 +28,9 @@ do(State) ->
                             fun(State1) ->
                                {ok, Module} = compile:file("gen/test/test_project_test"),
 
-                               shine:run_suite([{"test_project_test", extract_tests(Module)}]),
+                               shine:run_suite([{test_module,
+                                                 "test_project_test",
+                                                 extract_tests(Module)}]),
                                {ok, State1}
                             end).
 
@@ -39,7 +41,7 @@ format_error(Reason) ->
 extract_tests(Module) ->
     lists:filtermap(fun({Function, Arity}) ->
                        case is_test(Function, Arity) of
-                           true -> {true, to_fun(Module, Function, Arity)};
+                           true -> {true, to_test(Module, Function, Arity)};
                            false -> false
                        end
                     end,
@@ -50,5 +52,6 @@ is_test(Name, 0) ->
 is_test(_Name, _Arity) ->
     false.
 
-to_fun(Module, Function, 0) ->
-    fun() -> gleam_stdlib:rescue(fun() -> erlang:apply(Module, Function, []) end) end.
+to_test(Module, Function, 0) ->
+    Fun = fun() -> gleam_stdlib:rescue(fun() -> erlang:apply(Module, Function, []) end) end,
+    {test, Fun}.

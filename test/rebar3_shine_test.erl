@@ -3,5 +3,5 @@
  
 extract_tests_passing_test() ->
     Module = fixtures@passing_test_module,
-    [Test] = rebar3_shine:extract_tests(Module),
+    [{test, Test}] = rebar3_shine:extract_tests(Module),
     ?assertEqual({ok, nil}, Test()).
