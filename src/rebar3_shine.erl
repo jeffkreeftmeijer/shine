@@ -26,11 +26,12 @@ init(State) ->
 do(State) ->
     rebar_gleam:provider_do(State,
                             fun(State1) ->
-                               Module = test_project_test,
+                               {ok, State2} = rebar_prv_compile:do(State1),
+
                                shine:run_suite([{test_module,
                                                  "test_project_test",
-                                                 extract_tests(Module)}]),
-                               {ok, State1}
+                                                 extract_tests(test_project_test)}]),
+                               {ok, State2}
                             end).
 
 -spec format_error(any()) -> iolist().
