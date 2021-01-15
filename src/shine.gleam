@@ -4,7 +4,7 @@ import gleam/io
 import gleam/dynamic.{Dynamic}
 
 pub type Test {
-  Test(run: fn() -> Result(Dynamic, Exception))
+  Test(name: String, run: fn() -> Result(Dynamic, Exception))
 }
 
 pub type TestModule {

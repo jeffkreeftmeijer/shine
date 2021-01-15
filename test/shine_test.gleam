@@ -4,19 +4,20 @@ import gleam/dynamic
 import gleam/function
 
 pub fn run_passing_test() {
-  Test(run: passing)
+  Test(name: "passing_test", run: passing)
   |> shine.run_test()
   |> should.be_ok()
 }
 
 pub fn run_failing_test() {
-  Test(run: failing)
+  Test(name: "failing_test", run: failing)
   |> shine.run_test()
   |> should.be_error()
 }
 
 pub fn run_test_module_test() {
-  let test_module = TestModule(name: "test", tests: [Test(run: passing)])
+  let test_module =
+    TestModule(name: "test", tests: [Test(name: "passing_test", run: passing)])
   assert tuple("test", [result]) = shine.run_test_module(test_module)
 
   result
@@ -24,7 +25,9 @@ pub fn run_test_module_test() {
 }
 
 pub fn run_suite_test() {
-  let suite = [TestModule(name: "test", tests: [Test(run: passing)])]
+  let suite = [
+    TestModule(name: "test", tests: [Test(name: "passing_test", run: passing)]),
+  ]
   assert [tuple("test", [result])] = shine.run_suite(suite)
 
   result
