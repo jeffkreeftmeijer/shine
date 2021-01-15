@@ -1,29 +1,22 @@
-# shine
+# ✨ Shine
 
-A Gleam program
-
-
-## Quick start
-
-```sh
-# Build the project
-rebar3 compile
-
-# Run the eunit tests
-rebar3 eunit
-
-# Run the Erlang REPL
-rebar3 shell
-```
-
+A work-in-progress test runner for Gleam and Erlang.
 
 ## Installation
 
-If [available in Hex](https://www.rebar3.org/docs/dependencies#section-declaring-dependencies)
-this package can be installed by adding `shine` to your `rebar.config` dependencies:
+Add Shine to `project_plugins` in your project's `rebar.config`:
 
-```erlang
-{deps, [
-    shine
-]}.
+``` erlang
+% rebar.config
+{project_plugins, [rebar_gleam, shine]}.
 ```
+
+Shine isn't available on Hex just yet, so you'll have to check it out in `_checkouts`:
+
+    $ git clone git@github.com:jeffkreeftmeijer/shine.git _checkouts/shine
+
+## Usage
+
+    $ rebar3 shine
+
+Find any differences between running EUnit and Shine in your project? Please [open an issue](https://github.com/jeffkreeftmeijer/shine/issues/new).
