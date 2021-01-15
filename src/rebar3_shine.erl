@@ -68,4 +68,6 @@ is_test(_Name, _Arity) ->
 to_test(Module, FunctionName, 0) ->
     Fun = fun() -> gleam_stdlib:rescue(fun() -> erlang:apply(Module, FunctionName, []) end)
           end,
-    #test{name = atom_to_list(FunctionName), run = Fun}.
+    #test{module = atom_to_list(Module),
+          name = atom_to_list(FunctionName),
+          run = Fun}.

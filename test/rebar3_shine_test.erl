@@ -16,5 +16,6 @@ extract_tests_passing_test() ->
     Module = fixtures@passing_test_module,
     [Test] = rebar3_shine:extract_tests(Module),
 
+    ?assertEqual("fixtures@passing_test_module", Test#test.module),
     ?assertEqual("passing_test", Test#test.name),
     ?assertEqual({ok, nil}, (Test#test.run)()).
