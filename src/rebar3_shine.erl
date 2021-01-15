@@ -5,6 +5,9 @@
 -define(PROVIDER, shine).
 -define(DEPS, [app_discovery]).
 
+-include("src/shine_Test.hrl").
+-include("src/shine_TestModule.hrl").
+
 %% ===================================================================
 %% Public API
 %% ===================================================================
@@ -44,7 +47,7 @@ extract_test_modules(Paths) ->
     lists:map(fun(Path) ->
                  ModuleName = filename:basename(Path, ".erl"),
                  Module = list_to_atom(ModuleName),
-                 {test_module, ModuleName, extract_tests(Module)}
+                 #test_module{name = ModuleName, tests = extract_tests(Module)}
               end,
               Paths).
 
@@ -64,4 +67,4 @@ is_test(_Name, _Arity) ->
 
 to_test(Module, Function, 0) ->
     Fun = fun() -> gleam_stdlib:rescue(fun() -> erlang:apply(Module, Function, []) end) end,
-    {test, Fun}.
+    #test{run = Fun}.
