@@ -2,6 +2,7 @@ import gleam/function.{Exception}
 import gleam/list
 import gleam/io
 import gleam/dynamic.{Dynamic}
+import gleam/string
 
 pub type Test {
   Test(module: String, name: String, run: fn() -> Result(Dynamic, Exception))
@@ -31,7 +32,11 @@ pub fn run_test_module(
 pub fn run_test(test: Test) -> Result(Dynamic, Exception) {
   case test.run() {
     Error(e) -> {
-      io.println("F")
+      test.module
+      |> string.append(".")
+      |> string.append(test.name)
+      |> string.append("/0:")
+      |> io.println
       io.debug(e)
       Error(e)
     }
