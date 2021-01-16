@@ -1,5 +1,8 @@
 import shine/test
 import gleam/should
+import gleam/function.{Errored}
+import gleam/dynamic
+import gleam/atom
 
 pub fn wrap_passing_test() {
   test.wrap(fn() {
