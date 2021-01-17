@@ -20,8 +20,8 @@ init(State) ->
                           {deps, ?DEPS},
                           {example, "rebar3 shine"},
                           {opts, []},
-                          {short_desc, "A rebar plugin"},
-                          {desc, "A rebar plugin"},
+                          {short_desc, "Run tests with Shine"},
+                          {desc, "Run tests with Shine"},
                           {profiles, [test]}]),
     {ok, rebar_state:add_provider(State, Provider)}.
 
