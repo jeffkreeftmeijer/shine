@@ -30,6 +30,8 @@ do(State) ->
     rebar_gleam:provider_do(State,
                             fun(State1) ->
                                {ok, State2} = rebar_prv_compile:do(State1),
+                               code:add_pathsa(
+                                   rebar_state:code_paths(State2, all_deps)),
 
                                Paths = filelib:wildcard("gen/test/**/*.erl"),
                                Suite = extract_test_modules(Paths),
