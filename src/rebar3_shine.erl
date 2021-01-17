@@ -27,19 +27,28 @@ init(State) ->
 
 -spec do(rebar_state:t()) -> {ok, rebar_state:t()} | {error, string()}.
 do(State) ->
-    rebar_gleam:provider_do(State,
-                            fun(State1) ->
-                               {ok, State2} = rebar_prv_compile:do(State1),
-                               code:add_pathsa(
-                                   rebar_state:code_paths(State2, all_deps)),
+    provider_do(State,
+                fun(State1) ->
+                   {ok, State2} = rebar_prv_compile:do(State1),
+                   code:add_pathsa(
+                       rebar_state:code_paths(State2, all_deps)),
 
-                               Paths = filelib:wildcard("gen/test/**/*.erl"),
-                               Suite = extract_test_modules(Paths),
+                   Paths =
+                       filelib:wildcard("gen/test/**/*.erl") ++ filelib:wildcard("test/**/*.erl"),
+                   Suite = extract_test_modules(Paths),
 
-                               shine:run_suite(Suite),
+                   shine:run_suite(Suite),
 
-                               {ok, State2}
-                            end).
+                   {ok, State2}
+                end).
+
+provider_do(State, Fun) ->
+    case code:ensure_loaded(rebar_gleam) of
+        {module, rebar_gleam} ->
+            rebar_gleam:provider_do(State, Fun);
+        {error, _} ->
+            Fun(State)
+    end.
 
 -spec format_error(any()) -> iolist().
 format_error(Reason) ->
