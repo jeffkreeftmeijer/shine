@@ -8,12 +8,8 @@ Add Shine to `project_plugins` in your project's `rebar.config`:
 
 ``` erlang
 % rebar.config
-{project_plugins, [rebar_gleam, shine]}.
+{project_plugins, [{shine, {git, "https://github.com/jeffkreeftmeijer/shine.git", {branch, "main"}}}]}.
 ```
-
-Shine isn't available on Hex just yet, so you'll have to check it out in `_checkouts`:
-
-    $ git clone git@github.com:jeffkreeftmeijer/shine.git _checkouts/shine
 
 ## Usage
 
