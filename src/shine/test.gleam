@@ -6,7 +6,7 @@ pub type Test {
   Test(module: String, name: String, run: fn() -> Result(Dynamic, Exception))
 }
 
-pub fn wrap(fun: fn() -> a) {
+pub fn wrap(fun: fn() -> a) -> fn() -> Result(a, tuple(Atom, Dynamic, Dynamic)) {
   fn() { rescue(fun) }
 }
 
