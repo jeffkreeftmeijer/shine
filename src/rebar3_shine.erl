@@ -5,9 +5,6 @@
 -define(PROVIDER, shine).
 -define(DEPS, [app_discovery]).
 
--include("src/shine@test_Test.hrl").
--include("src/shine_TestModule.hrl").
-
 %% ===================================================================
 %% Public API
 %% ===================================================================
@@ -54,7 +51,7 @@ extract_test_modules(Paths) ->
     lists:map(fun(Path) ->
                  ModuleName = filename:basename(Path, ".erl"),
                  Module = list_to_atom(ModuleName),
-                 #test_module{name = ModuleName, tests = extract_tests(Module)}
+                 {test_module, ModuleName, extract_tests(Module)}
               end,
               Paths).
 
