@@ -3,6 +3,7 @@ import shine/test.{Test}
 import gleam/should
 import gleam/dynamic
 import gleam/function
+import gleam/atom
 
 pub fn run_passing_test() {
   Test(module: "shine_test", name: "passing_test", run: passing)
@@ -46,5 +47,9 @@ pub fn passing() {
 }
 
 pub fn failing() {
-  Error(function.Errored(dynamic.from("")))
+  Error(tuple(
+    atom.create_from_string("errored"),
+    dynamic.from(""),
+    dynamic.from([]),
+  ))
 }
