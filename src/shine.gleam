@@ -10,7 +10,7 @@ pub fn init(state) {
   Ok(state)
 }
 
-pub fn run_suite(suite: List(TestModule)) -> List(TestModule) {
+pub fn run(suite: List(TestModule)) -> List(TestModule) {
   list.map(
     suite,
     fn(test_module: TestModule) {
