@@ -1,8 +1,8 @@
 -module(rebar3_shine_test).
 -include_lib("eunit/include/eunit.hrl").
 
--include("src/shine_Test.hrl").
--include("src/shine_TestModule.hrl").
+-include("gen/src/shine@test_Test.hrl").
+-include("gen/src/shine_TestModule.hrl").
 
 extract_test_modules_test() ->
     Paths = ["gen/test/fixtures@passing_test_module.erl"],
