@@ -1,7 +1,7 @@
 -module(rebar3_shine_test).
 -include_lib("eunit/include/eunit.hrl").
 
--include("src/shine_Test.hrl").
+-include("src/shine@test_Test.hrl").
 -include("src/shine_TestModule.hrl").
 
 extract_test_modules_test() ->

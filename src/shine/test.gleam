@@ -1,5 +1,10 @@
+import gleam/function.{Exception}
 import gleam/atom.{Atom}
 import gleam/dynamic.{Dynamic}
+
+pub type Test {
+  Test(module: String, name: String, run: fn() -> Result(Dynamic, Exception))
+}
 
 pub fn wrap(fun: fn() -> a) {
   fn() { rescue(fun) }

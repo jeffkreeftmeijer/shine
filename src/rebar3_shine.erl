@@ -5,7 +5,7 @@
 -define(PROVIDER, shine).
 -define(DEPS, [app_discovery]).
 
--include("src/shine_Test.hrl").
+-include("src/shine@test_Test.hrl").
 -include("src/shine_TestModule.hrl").
 
 %% ===================================================================

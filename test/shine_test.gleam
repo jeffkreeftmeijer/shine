@@ -1,4 +1,5 @@
-import shine.{Test, TestModule}
+import shine.{TestModule}
+import shine/test.{Test}
 import gleam/should
 import gleam/dynamic
 import gleam/function

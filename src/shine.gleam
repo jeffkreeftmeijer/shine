@@ -3,10 +3,7 @@ import gleam/list
 import gleam/io
 import gleam/dynamic.{Dynamic}
 import gleam/string
-
-pub type Test {
-  Test(module: String, name: String, run: fn() -> Result(Dynamic, Exception))
-}
+import shine/test.{Test}
 
 pub type TestModule {
   TestModule(name: String, tests: List(Test))
