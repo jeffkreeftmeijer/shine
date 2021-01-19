@@ -1,8 +1,18 @@
-import shine/test
+import shine/test.{Test}
 import gleam/should
 import gleam/function
 import gleam/dynamic
 import gleam/atom
+
+pub fn run_test() {
+  assert Ok(dynamic_result) =
+    test.run(Test(module: "shine_test", name: "passing_test", run: passing))
+
+  assert Ok(result) = dynamic.string(dynamic_result)
+
+  result
+  |> should.equal("")
+}
 
 pub fn wrap_passing_test() {
   let t =
@@ -52,4 +62,8 @@ pub fn new_failing_test() {
   stack
   |> dynamic.list
   |> should.be_ok
+}
+
+fn passing() {
+  Ok(dynamic.from(""))
 }
