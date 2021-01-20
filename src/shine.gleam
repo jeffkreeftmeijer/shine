@@ -1,6 +1,4 @@
-import gleam/atom.{Atom}
 import gleam/list
-import gleam/dynamic.{Dynamic}
 import shine/test.{Test}
 
 pub type TestModule {
@@ -12,16 +10,15 @@ pub fn init(state) {
   Ok(state)
 }
 
-pub fn run_suite(
-  suite: List(TestModule),
-) -> List(tuple(String, List(Result(Dynamic, tuple(Atom, Dynamic, Dynamic))))) {
+pub fn run_suite(suite: List(TestModule)) -> List(TestModule) {
   list.map(suite, run_test_module)
 }
 
-pub fn run_test_module(
-  test_module: TestModule,
-) -> tuple(String, List(Result(Dynamic, tuple(Atom, Dynamic, Dynamic)))) {
-  tuple(test_module.name, list.map(test_module.tests, test.run))
+pub fn run_test_module(test_module: TestModule) -> TestModule {
+  TestModule(
+    name: test_module.name,
+    tests: list.map(test_module.tests, test.run),
+  )
 }
 
 external fn rebar3_shine_init(state) -> state =

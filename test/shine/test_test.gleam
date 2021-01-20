@@ -1,13 +1,19 @@
-import shine/test.{Test}
+import shine/test.{Passed, Test, Upcoming}
 import gleam/should
 import gleam/function
 import gleam/dynamic
 import gleam/atom
 
 pub fn run_test() {
-  assert Ok(dynamic_result) =
-    test.run(Test(module: "shine_test", name: "passing_test", run: passing))
+  let test =
+    test.run(Test(
+      module: "shine_test",
+      name: "passing_test",
+      state: Upcoming,
+      run: passing,
+    ))
 
+  assert Passed(Ok(dynamic_result)) = test.state
   assert Ok(result) = dynamic.string(dynamic_result)
 
   result
