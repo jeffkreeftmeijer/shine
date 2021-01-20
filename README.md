@@ -2,6 +2,8 @@
 
 A work-in-progress test runner for Gleam and Erlang.
 
+![Shine Logo](./shine-github.svg)
+
 ## Installation
 
 Add Shine to `project_plugins` in your project's `rebar.config`:
