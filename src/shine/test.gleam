@@ -24,19 +24,8 @@ pub fn new(module: String, name: String, fun: fn() -> a) -> Test {
 
 pub fn run(test: Test) -> Test {
   let state = case test.run() {
-    Error(e) -> {
-      test.module
-      |> string.append(".")
-      |> string.append(test.name)
-      |> string.append("/0:")
-      |> io.println
-      io.debug(e)
-      Failed(Error(e))
-    }
-    Ok(a) -> {
-      io.print(".")
-      Passed(Ok(a))
-    }
+    Error(e) -> Failed(Error(e))
+    Ok(a) -> Passed(Ok(a))
   }
 
   Test(..test, state: state)

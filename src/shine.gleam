@@ -1,5 +1,6 @@
 import gleam/list
 import shine/test.{Test}
+import shine/formatter
 
 pub type TestModule {
   TestModule(name: String, tests: List(Test))
@@ -10,12 +11,23 @@ pub fn init(state) {
   Ok(state)
 }
 
-pub fn run_suite(suite: List(TestModule)) -> List(TestModule) {
-  list.map(suite, run_test_module)
-}
-
-pub fn run_test_module(test_module: TestModule) -> TestModule {
-  TestModule(..test_module, tests: list.map(test_module.tests, test.run))
+pub fn run(suite: List(TestModule)) -> List(TestModule) {
+  list.map(
+    suite,
+    fn(test_module: TestModule) {
+      TestModule(
+        ..test_module,
+        tests: list.map(
+          test_module.tests,
+          fn(test) {
+            test
+            |> test.run
+            |> formatter.print()
+          },
+        ),
+      )
+    },
+  )
 }
 
 external fn rebar3_shine_init(state) -> state =
