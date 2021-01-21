@@ -1,4 +1,5 @@
 import gleam/should
+import gleam/string
 import shine/formatter
 import fixtures
 
@@ -11,5 +12,8 @@ pub fn format_passed_test() {
 pub fn format_failed_test() {
   fixtures.test_failed()
   |> formatter.format()
-  |> should.equal("F")
+  |> string.starts_with(
+    "F\nshine_test:failing_test/0:\n{errored,\n    {assertEqual",
+  )
+  |> should.be_true()
 }
