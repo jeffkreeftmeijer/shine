@@ -1,18 +1,12 @@
-import shine/test.{Passed, Test, Upcoming}
+import shine/test.{Passed, Upcoming}
 import gleam/should
 import gleam/function
 import gleam/dynamic
 import gleam/atom
+import fixtures
 
 pub fn run_test() {
-  let test =
-    test.run(Test(
-      module: "shine_test",
-      name: "passing_test",
-      state: Upcoming,
-      run: passing,
-    ))
-
+  let test = test.run(fixtures.test())
   assert Passed(Ok(dynamic_result)) = test.state
   assert Ok(result) = dynamic.string(dynamic_result)
 
@@ -68,8 +62,4 @@ pub fn new_failing_test() {
   stack
   |> dynamic.list
   |> should.be_ok
-}
-
-fn passing() {
-  Ok(dynamic.from(""))
 }
