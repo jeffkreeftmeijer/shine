@@ -39,7 +39,7 @@ pub fn run(test: Test) -> Test {
     }
   }
 
-  Test(module: test.module, name: test.name, state: state, run: test.run)
+  Test(..test, state: state)
 }
 
 fn wrap(

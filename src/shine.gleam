@@ -15,10 +15,7 @@ pub fn run_suite(suite: List(TestModule)) -> List(TestModule) {
 }
 
 pub fn run_test_module(test_module: TestModule) -> TestModule {
-  TestModule(
-    name: test_module.name,
-    tests: list.map(test_module.tests, test.run),
-  )
+  TestModule(..test_module, tests: list.map(test_module.tests, test.run))
 }
 
 external fn rebar3_shine_init(state) -> state =
