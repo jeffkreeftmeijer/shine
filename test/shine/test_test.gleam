@@ -14,7 +14,7 @@ pub fn run_test() {
   |> should.equal("")
 }
 
-pub fn wrap_passing_test() {
+pub fn new_passing_test() {
   let t =
     test.new(
       "module",
