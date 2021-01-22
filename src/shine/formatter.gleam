@@ -1,6 +1,8 @@
+import gleam/int
 import gleam/io
 import gleam/string
 import shine/test.{Failed, Passed, Test}
+import shine/reporter.{TestStats}
 
 pub fn print_test(test: Test) {
   test
@@ -22,6 +24,22 @@ pub fn format_test(test: Test) {
       |> string.append(result)
     }
   }
+}
+
+pub fn print_stats(stats: TestStats) {
+  stats
+  |> format_stats()
+  |> io.print()
+
+  stats
+}
+
+pub fn format_stats(stats: TestStats) {
+  "\n"
+  |> string.append(int.to_string(stats.tests))
+  |> string.append(" tests, ")
+  |> string.append(int.to_string(stats.failures))
+  |> string.append(" failures.")
 }
 
 fn test_name(test: Test) -> String {

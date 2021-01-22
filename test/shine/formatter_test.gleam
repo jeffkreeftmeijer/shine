@@ -17,3 +17,9 @@ pub fn format_failed_test() {
   )
   |> should.be_true()
 }
+
+pub fn format_report_test() {
+  fixtures.stats()
+  |> formatter.format_stats()
+  |> should.equal("\n3 tests, 2 failures.")
+}
