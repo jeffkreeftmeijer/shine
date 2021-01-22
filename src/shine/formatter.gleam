@@ -22,6 +22,7 @@ pub fn format_test(test: Test) {
       |> string.append(test_name)
       |> string.append(":\n")
       |> string.append(result)
+      |> string.append("\n")
     }
   }
 }
@@ -39,7 +40,7 @@ pub fn format_stats(stats: TestStats) {
   |> string.append(pluralize(stats.tests, "test"))
   |> string.append(", ")
   |> string.append(pluralize(stats.failures, "failure"))
-  |> string.append(".")
+  |> string.append(".\n")
 }
 
 fn test_name(test: Test) -> String {
