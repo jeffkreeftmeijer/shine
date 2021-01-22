@@ -2,7 +2,7 @@ import gleam/int
 import gleam/io
 import gleam/string
 import shine/test.{Failed, Passed, Test}
-import shine/reporter.{TestStats}
+import shine/stats.{TestStats}
 
 pub fn print_test(test: Test) {
   test
