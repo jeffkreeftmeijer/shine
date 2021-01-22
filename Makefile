@@ -1,5 +1,6 @@
 test: noop
 	rebar3 eunit
+	rebar3 shine
 	rebar3 format --verify
 	gleam format --check src test
 
