@@ -22,7 +22,7 @@ pub fn run(suite: List(TestModule)) -> List(TestModule) {
           fn(test) {
             test
             |> test.run
-            |> formatter.print()
+            |> formatter.print_test
           },
         ),
       )

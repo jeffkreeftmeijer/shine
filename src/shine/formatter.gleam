@@ -2,15 +2,15 @@ import gleam/io
 import gleam/string
 import shine/test.{Failed, Passed, Test}
 
-pub fn print(test: Test) {
+pub fn print_test(test: Test) {
   test
-  |> format()
+  |> format_test()
   |> io.print()
 
   test
 }
 
-pub fn format(test: Test) {
+pub fn format_test(test: Test) {
   case test.state {
     Passed(_) -> "."
     Failed(Error(error)) -> {
