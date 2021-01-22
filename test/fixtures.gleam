@@ -27,3 +27,7 @@ pub fn test_failed() {
 pub fn stats() {
   reporter.TestStats(tests: 3, failures: 2)
 }
+
+pub fn stats_singular() {
+  reporter.TestStats(tests: 1, failures: 1)
+}

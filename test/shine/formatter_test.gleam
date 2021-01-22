@@ -23,3 +23,9 @@ pub fn format_report_test() {
   |> formatter.format_stats()
   |> should.equal("\n3 tests, 2 failures.")
 }
+
+pub fn format_report_singular_test() {
+  fixtures.stats_singular()
+  |> formatter.format_stats()
+  |> should.equal("\n1 test, 1 failure.")
+}

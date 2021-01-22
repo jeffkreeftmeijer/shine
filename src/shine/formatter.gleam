@@ -36,10 +36,10 @@ pub fn print_stats(stats: TestStats) {
 
 pub fn format_stats(stats: TestStats) {
   "\n"
-  |> string.append(int.to_string(stats.tests))
-  |> string.append(" tests, ")
-  |> string.append(int.to_string(stats.failures))
-  |> string.append(" failures.")
+  |> string.append(pluralize(stats.tests, "test"))
+  |> string.append(", ")
+  |> string.append(pluralize(stats.failures, "failure"))
+  |> string.append(".")
 }
 
 fn test_name(test: Test) -> String {
@@ -53,6 +53,18 @@ fn inspect(term) -> String {
   let [char_list, _] = io_lib_format("~tp\n", [term])
 
   char_list_to_string(char_list)
+}
+
+fn pluralize(count: Int, singular: String) {
+  case count {
+    1 -> string.append("1 ", singular)
+    _ ->
+      count
+      |> int.to_string()
+      |> string.append(" ")
+      |> string.append(singular)
+      |> string.append("s")
+  }
 }
 
 external fn io_lib_format(format, data) -> List(a) =
