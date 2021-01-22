@@ -17,4 +17,5 @@ jobs:
       - uses: gleam-lang/setup-gleam@v1.0.2
         with:
           gleam-version: 0.13.2
+      - run: make bootstrap
       - run: make test
