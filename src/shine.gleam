@@ -1,6 +1,8 @@
 import gleam/list
 import shine/test.{Test}
 import shine/formatter
+import shine/stats
+import gleam/otp/process
 
 pub type TestModule {
   TestModule(name: String, tests: List(Test))
@@ -11,7 +13,22 @@ pub fn init(state) {
   Ok(state)
 }
 
-pub fn run(suite: List(TestModule)) -> List(TestModule) {
+pub fn start(suite: List(TestModule)) -> Nil {
+  let Ok(stats) = stats.start()
+
+  run(suite, stats)
+
+  stats
+  |> stats.stats()
+  |> formatter.print_stats()
+
+  Nil
+}
+
+pub fn run(
+  suite: List(TestModule),
+  stats: process.Sender(stats.Message),
+) -> List(TestModule) {
   list.map(
     suite,
     fn(test_module: TestModule) {
@@ -20,9 +37,10 @@ pub fn run(suite: List(TestModule)) -> List(TestModule) {
         tests: list.map(
           test_module.tests,
           fn(test) {
-            test
-            |> test.run
-            |> formatter.print()
+            let test = test.run(test)
+
+            stats.test_finished(stats, test)
+            formatter.print_test(test)
           },
         ),
       )

@@ -31,7 +31,7 @@ do(State) ->
     Paths = filelib:wildcard("gen/test/**/*.erl") ++ filelib:wildcard("test/**/*.erl"),
     Suite = extract_test_modules(Paths),
 
-    provider_do(State1, fun(_) -> shine:run(Suite) end),
+    provider_do(State1, fun(_) -> shine:start(Suite) end),
 
     {ok, State1}.
 
