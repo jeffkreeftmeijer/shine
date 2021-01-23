@@ -1,18 +1,15 @@
 import gleam/otp/actor
 import gleam/otp/process
 import shine/test
-
-pub type TestStats {
-  TestStats(tests: Int, failures: Int)
-}
+import shine/stats
 
 pub type Message {
-  GetStats(reply_channel: process.Sender(TestStats))
+  GetStats(reply_channel: process.Sender(stats.TestStats))
   TestFinished(test: test.Test)
 }
 
 pub fn start() {
-  actor.start(TestStats(tests: 0, failures: 0), handle_message)
+  actor.start(stats.TestStats(tests: 0, failures: 0), handle_message)
 }
 
 pub fn stats(reporter) {
@@ -32,12 +29,12 @@ fn handle_message(message, stats) {
     TestFinished(test) ->
       case test.state {
         test.Passed(_) ->
-          actor.Continue(TestStats(
+          actor.Continue(stats.TestStats(
             tests: stats.tests + 1,
             failures: stats.failures,
           ))
         test.Failed(_) ->
-          actor.Continue(TestStats(
+          actor.Continue(stats.TestStats(
             tests: stats.tests + 1,
             failures: stats.failures + 1,
           ))
