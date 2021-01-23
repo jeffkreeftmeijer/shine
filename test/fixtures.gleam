@@ -7,12 +7,7 @@ pub fn test() {
   test.new("shine_test", "passing_test", fn() { dynamic.from("") })
 }
 
-pub fn test_passed() {
-  test()
-  |> test.run()
-}
-
-pub fn test_failed() {
+pub fn test_failing() {
   test.new(
     "shine_test",
     "failing_test",
@@ -21,6 +16,15 @@ pub fn test_failed() {
       |> should.equal(2)
     },
   )
+}
+
+pub fn test_passed() {
+  test()
+  |> test.run()
+}
+
+pub fn test_failed() {
+  test_failing()
   |> test.run()
 }
 

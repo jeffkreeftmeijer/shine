@@ -13,16 +13,15 @@ pub fn init(state) {
   Ok(state)
 }
 
-pub fn start(suite: List(TestModule)) -> Nil {
+pub fn start(suite: List(TestModule)) -> Int {
   let Ok(stats) = stats.start()
 
   run(suite, stats)
 
-  stats
-  |> stats.stats()
-  |> formatter.print_stats()
+  let stats = stats.stats(stats)
+  formatter.print_stats(stats)
 
-  Nil
+  stats.failures
 }
 
 pub fn run(
