@@ -11,6 +11,12 @@ pub fn init(state) {
   Ok(state)
 }
 
+pub fn start(suite: List(TestModule)) -> Nil {
+  run(suite)
+
+  Nil
+}
+
 pub fn run(suite: List(TestModule)) -> List(TestModule) {
   list.map(
     suite,
