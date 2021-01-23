@@ -12,7 +12,7 @@ pub fn run_passing_test() {
 
 pub fn run_raising_test() {
   assert Failed(Error(tuple(kind, error, stack))) =
-    test.run(fixtures.test_failed()).state
+    test.run(fixtures.test_raised()).state
 
   let Ok(tuple(dynamic_kind, _)) = dynamic.tuple2(error)
   let Ok(error_kind) = dynamic.atom(dynamic_kind)

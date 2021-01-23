@@ -17,10 +17,10 @@ pub fn test_passed() {
   |> test.run()
 }
 
-pub fn test_failed() {
+pub fn test_raised() {
   test.new(
     "shine_test",
-    "failing_test",
+    "raising_test",
     fn() {
       1
       |> should.equal(2)
