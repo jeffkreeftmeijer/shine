@@ -32,7 +32,7 @@ pub fn new_passing_test() {
   |> should.equal("name")
 
   t.run()
-  |> should.be_ok
+  |> should.equal(Ok(dynamic.from(atom.create_from_string("ok"))))
 }
 
 pub fn new_failing_test() {
