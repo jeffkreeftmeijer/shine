@@ -5,7 +5,7 @@ import gleam/string
 
 pub type TestState {
   Upcoming
-  Passed(Result(Dynamic, tuple(Atom, Dynamic, Dynamic)))
+  Passed
   Failed(Result(Dynamic, tuple(Atom, Dynamic, Dynamic)))
 }
 
@@ -25,7 +25,7 @@ pub fn new(module: String, name: String, fun: fn() -> a) -> Test {
 pub fn run(test: Test) -> Test {
   let state = case test.run() {
     Error(e) -> Failed(Error(e))
-    Ok(a) -> Passed(Ok(a))
+    Ok(_) -> Passed
   }
 
   Test(..test, state: state)

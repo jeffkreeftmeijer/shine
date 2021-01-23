@@ -10,5 +10,5 @@ pub fn run_test() {
   let [test] = test_module.tests
 
   test.state
-  |> should.equal(Passed(Ok(dynamic.from(""))))
+  |> should.equal(Passed)
 }

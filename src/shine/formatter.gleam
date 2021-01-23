@@ -12,7 +12,7 @@ pub fn print(test: Test) {
 
 pub fn format(test: Test) {
   case test.state {
-    Passed(_) -> "."
+    Passed -> "."
     Failed(Error(error)) -> {
       let test_name = test_name(test)
       let result = inspect(error)

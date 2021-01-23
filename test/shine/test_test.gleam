@@ -6,12 +6,8 @@ import gleam/atom
 import fixtures
 
 pub fn run_test() {
-  let test = test.run(fixtures.test())
-  assert Passed(Ok(dynamic_result)) = test.state
-  assert Ok(result) = dynamic.string(dynamic_result)
-
-  result
-  |> should.equal("")
+  test.run(fixtures.test()).state
+  |> should.equal(Passed)
 }
 
 pub fn new_passing_test() {

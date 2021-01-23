@@ -1,9 +1,15 @@
-import gleam/dynamic
 import gleam/should
 import shine/test
 
 pub fn test() {
-  test.new("shine_test", "passing_test", fn() { dynamic.from("") })
+  test.new(
+    "shine_test",
+    "passing_test",
+    fn() {
+      1
+      |> should.equal(1)
+    },
+  )
 }
 
 pub fn test_passed() {
