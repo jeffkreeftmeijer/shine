@@ -1,6 +1,6 @@
 {application, shine,
- [{description, "A Gleam program"},
-  {vsn, "1.0.0"},
+ [{description, "A test runner for Gleam and Erlang."},
+  {vsn, "0.1.0-beta.1"},
   {registered, []},
   {applications,
    [kernel,
@@ -12,5 +12,5 @@
 
   {include_files, ["gleam.toml", "gen"]},
   {licenses, ["Apache 2.0"]},
-  {links, []}
+  {links, [{"GitHub", "https://github.com/jeffkreeftmeijer/shine"}]}
 ]}.

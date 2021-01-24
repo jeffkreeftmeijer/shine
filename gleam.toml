@@ -1,7 +1,7 @@
 name = "shine"
-version = "1.0.0"
+version = "0.1.0-beta.1"
 
-# [docs]
-# links = [
-#   { title = 'GitHub', href = 'https://github.com/username/project_name' }
-# ]
+[repository]
+type = "github"
+user = "jeffkreeftmeijer"
+repo = "shine"
