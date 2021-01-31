@@ -6,15 +6,10 @@ A work-in-progress test runner for Gleam and Erlang.
 
 ## Installation
 
-Add Shine to `project_plugins` in your project's `rebar.config`. Shine is
-currently released as 0.1.0-beta.1, which is a prerelease, so make sure to
-allow installing prerelease versions through rebar3's `deps_allow_prerelease`
-configuration:
+Add Shine to `project_plugins` in your project's `rebar.config`:
 
 ``` erlang
 % rebar.config
-{deps_allow_prerelease, true}.
-
 {project_plugins, [shine]}.
 ```
 

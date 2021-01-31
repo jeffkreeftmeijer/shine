@@ -1,6 +1,6 @@
 {application, shine,
  [{description, "A test runner for Gleam and Erlang."},
-  {vsn, "0.1.0-beta.1"},
+  {vsn, "0.1.0"},
   {registered, []},
   {applications,
    [kernel,
