@@ -5,8 +5,8 @@ import gleam/string
 
 pub type TestState {
   Upcoming
-  Passed(Result(Dynamic, tuple(Atom, Dynamic, Dynamic)))
-  Failed(Result(Dynamic, tuple(Atom, Dynamic, Dynamic)))
+  Passed(Result(Dynamic, tuple(Atom, Dynamic, List(Dynamic))))
+  Failed(Result(Dynamic, tuple(Atom, Dynamic, List(Dynamic))))
 }
 
 pub type Test {
@@ -14,7 +14,7 @@ pub type Test {
     module: String,
     name: String,
     state: TestState,
-    run: fn() -> Result(Dynamic, tuple(Atom, Dynamic, Dynamic)),
+    run: fn() -> Result(Dynamic, tuple(Atom, Dynamic, List(Dynamic))),
   )
 }
 
@@ -33,9 +33,11 @@ pub fn run(test: Test) -> Test {
 
 fn wrap(
   fun: fn() -> a,
-) -> fn() -> Result(Dynamic, tuple(Atom, Dynamic, Dynamic)) {
+) -> fn() -> Result(Dynamic, tuple(Atom, Dynamic, List(Dynamic))) {
   fn() { rescue(fun) }
 }
 
-external fn rescue(fn() -> a) -> Result(Dynamic, tuple(Atom, Dynamic, Dynamic)) =
+external fn rescue(
+  fn() -> a,
+) -> Result(Dynamic, tuple(Atom, Dynamic, List(Dynamic))) =
   "shine_external" "rescue"

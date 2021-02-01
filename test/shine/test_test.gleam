@@ -3,6 +3,7 @@ import gleam/should
 import gleam/function
 import gleam/dynamic
 import gleam/atom
+import gleam/list
 import fixtures
 
 pub fn run_test() {
@@ -60,6 +61,6 @@ pub fn new_failing_test() {
   |> should.equal("assertEqual")
 
   stack
-  |> dynamic.list
-  |> should.be_ok
+  |> list.is_empty()
+  |> should.be_false
 }

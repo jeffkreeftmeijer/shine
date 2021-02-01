@@ -30,4 +30,4 @@ new_failing_test() ->
     {ok, Error_kind} = gleam@dynamic:atom(Dynamic_kind),
     gleam@should:equal(gleam@atom:to_string(Kind), <<"errored"/utf8>>),
     gleam@should:equal(gleam@atom:to_string(Error_kind), <<"assertEqual"/utf8>>),
-    gleam@should:be_ok(gleam@dynamic:list(Stack)).
+    gleam@should:be_false(gleam@list:is_empty(Stack)).
